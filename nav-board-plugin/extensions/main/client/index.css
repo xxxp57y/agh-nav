@@ -1,0 +1,441 @@
+/* 导航工作台样式：只用宿主已有的 CSS 变量，取不到时退化到固定色。 */
+
+.agh-nav-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.agh-nav-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--text-primary, #e6edf3);
+  background: var(--surface-1, transparent);
+}
+
+.agh-nav-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.75rem 0.35rem;
+}
+
+.agh-nav-title {
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.agh-nav-sub,
+.agh-nav-note,
+.agh-nav-footnote {
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.72rem;
+}
+
+.agh-nav-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.agh-nav-tab {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle, #30363d);
+  background: transparent;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.agh-nav-tab-active {
+  color: var(--text-primary, #e6edf3);
+  border-color: var(--text-secondary, #8b949e);
+  background: var(--surface-2, rgba(139, 148, 158, 0.14));
+}
+
+.agh-nav-badge {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle, #30363d);
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.68rem;
+}
+
+.agh-nav-badge-warn {
+  border-color: #b45309;
+  color: #f59e0b;
+}
+
+.agh-nav-warn {
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid #b45309;
+  background: rgba(245, 158, 11, 0.08);
+  color: #f59e0b;
+  font-size: 0.72rem;
+  word-break: break-word;
+}
+
+.agh-nav-scroll {
+  overflow-x: auto;
+}
+
+.agh-nav-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.agh-nav-table-small {
+  font-size: 0.7rem;
+}
+
+.agh-nav-th {
+  padding: 0.2rem 0.3rem;
+  text-align: right;
+  font-weight: 500;
+  color: var(--text-secondary, #8b949e);
+  border-bottom: 1px solid var(--border-subtle, #30363d);
+  white-space: nowrap;
+}
+
+.agh-nav-th-scene {
+  text-align: left;
+}
+
+.agh-nav-td {
+  padding: 0.15rem 0.3rem;
+  border-bottom: 1px solid var(--border-subtle, rgba(48, 54, 61, 0.5));
+  white-space: nowrap;
+}
+
+.agh-nav-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.agh-nav-scene {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+  max-width: 8.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agh-nav-best {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.agh-nav-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  justify-content: flex-end;
+}
+
+.agh-nav-pct {
+  min-width: 2.6rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.agh-nav-bar {
+  display: inline-block;
+  width: 2.2rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: var(--surface-3, rgba(139, 148, 158, 0.25));
+  overflow: hidden;
+}
+
+.agh-nav-bar-fill {
+  display: block;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.agh-nav-runs summary {
+  cursor: pointer;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.72rem;
+}
+
+.agh-nav-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agh-nav-button {
+  padding: 0.15rem 0.55rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border-subtle, #30363d);
+  background: transparent;
+  color: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.agh-nav-button:hover {
+  background: var(--surface-2, rgba(139, 148, 158, 0.12));
+}
+
+/* ---------------- 实时导航面板 ---------------- */
+
+.agh-nl-live {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0 0.75rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-primary, #e6edf3);
+}
+
+.agh-nl-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.agh-nl-select {
+  flex: 1 1 auto;
+  min-width: 8rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border-subtle, #30363d);
+  background: var(--surface-2, rgba(139, 148, 158, 0.1));
+  color: inherit;
+  font-size: 0.72rem;
+}
+
+.agh-nl-badge {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle, #30363d);
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.66rem;
+  white-space: nowrap;
+}
+
+.agh-nl-badge-ok {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.agh-nl-badge-warn {
+  border-color: #b45309;
+  color: #f59e0b;
+}
+
+.agh-nl-hint {
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.agh-nl-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background: #0d1117;
+  border: 1px solid var(--border-subtle, #30363d);
+}
+
+.agh-nl-frame-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.agh-nl-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.agh-nl-caption {
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.agh-nl-mapwrap {
+  position: relative;
+  width: 100%;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle, #30363d);
+  background: #11161d;
+}
+
+.agh-nl-map {
+  width: 100%;
+  display: block;
+}
+
+.agh-nl-mapoverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.agh-nl-telemetry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem 0.5rem;
+}
+
+.agh-nl-kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.35rem;
+  border-bottom: 1px dashed var(--border-subtle, rgba(48, 54, 61, 0.5));
+  padding: 0.1rem 0;
+}
+
+.agh-nl-k {
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.agh-nl-v {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.7rem;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agh-nl-section-title {
+  margin-top: 0.2rem;
+  font-weight: 600;
+  font-size: 0.74rem;
+  color: var(--text-secondary, #8b949e);
+}
+
+.agh-nl-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-height: 11rem;
+  overflow-y: auto;
+}
+
+.agh-nl-event {
+  display: flex;
+  gap: 0.35rem;
+  align-items: baseline;
+  font-size: 0.68rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  background: var(--surface-2, rgba(139, 148, 158, 0.08));
+}
+
+.agh-nl-event-kind {
+  flex: 0 0 auto;
+  color: var(--text-secondary, #8b949e);
+}
+
+.agh-nl-event-detail {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agh-nl-event-arrived .agh-nl-event-kind,
+.agh-nl-event-waypoint_reached .agh-nl-event-kind {
+  color: #22c55e;
+}
+
+.agh-nl-event-planner_error .agh-nl-event-kind,
+.agh-nl-event-stalled .agh-nl-event-kind,
+.agh-nl-event-episode_over .agh-nl-event-kind {
+  color: #f59e0b;
+}
+
+.agh-nl-event-plan_changed .agh-nl-event-kind {
+  color: #58a6ff;
+}
+
+.agh-nl-details summary {
+  cursor: pointer;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.7rem;
+}
+
+.agh-nl-episodes {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-height: 10rem;
+  overflow-y: auto;
+}
+
+.agh-nl-episodes li {
+  display: flex;
+  gap: 0.3rem;
+  font-size: 0.68rem;
+  color: var(--text-secondary, #8b949e);
+}
+
+.agh-nl-ep-id {
+  flex: 0 0 auto;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  color: var(--text-primary, #e6edf3);
+}
+
+.agh-nl-offline {
+  margin: 0 0.75rem 0.75rem;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #b45309;
+  background: rgba(245, 158, 11, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+}
+
+.agh-nl-offline-title {
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.agh-nl-offline-addr {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+}
+
+.agh-nl-offline-hint,
+.agh-nl-offline-steps {
+  color: var(--text-secondary, #8b949e);
+  word-break: break-word;
+}

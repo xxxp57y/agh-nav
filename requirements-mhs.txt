@@ -1,0 +1,4 @@
+# Official agnes_mhs SDK is loaded from the pinned AGH checkout via PYTHONPATH.
+websockets>=14
+jsonschema>=4.18
+Pillow>=10

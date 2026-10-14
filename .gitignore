@@ -1,0 +1,33 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.secrets/
+.llm-key
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+*key*.txt
+# Runtime state and dataset-derived data
+agent/workspaces/
+logs/
+out/
+/data/
+**/cache/
+navlive/data/*.json
+!navlive/data/landmarks.example.json
+nav-board-plugin/data/board.json
+# Environments and build products
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.cache/
+.tools/
+.pnpm-store/
+*.log
+*.pid
+*.tgz
+*.zip
+.DS_Store

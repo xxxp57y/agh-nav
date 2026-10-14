@@ -1,0 +1,30 @@
+{
+  "name": "@agh-nav/nav-board-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "导航工作台（Web 面板）：实时导航（第一人称画面 / 2D 楼层图与轨迹 / 遥测 / 事件流）+ 五套恢复配置 × 8 场景对照表。",
+  "exports": "./extensions/main/index.mjs",
+  "files": [
+    "extensions",
+    "lib",
+    "data",
+    "README.md"
+  ],
+  "agnes": {
+    "plugins": [
+      {
+        "export": "navBoard",
+        "id": "ext:agh-nav/nav-board",
+        "runtime": "in-process"
+      }
+    ],
+    "clientDescriptors": [
+      {
+        "rowId": "ext:agh-nav/nav-board",
+        "path": "./extensions/main/agnes.client.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@agh-nav/nav-agent-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "导航侧能力包：离线诊断（nav_*：日志指标 / 失败事件 / 恢复通道复算）+ 实时导航（navlive_*：在已跑好的场景里按自然语言指令把机器人走过去）。",
+  "exports": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "lib",
+    "data",
+    "README.md"
+  ],
+  "agnes": {
+    "plugins": [
+      {
+        "export": "navAgent",
+        "id": "ext:agh-nav/nav-agent",
+        "runtime": "in-process",
+        "inject": ["extension", "skills"]
+      }
+    ]
+  }
+}

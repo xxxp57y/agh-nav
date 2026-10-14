@@ -1,0 +1,70 @@
+diff --git a/packages/mhs/plugin/client/src/layout/world.tsx b/packages/mhs/plugin/client/src/layout/world.tsx
+index 8446496..bb503f1 100644
+--- a/packages/mhs/plugin/client/src/layout/world.tsx
++++ b/packages/mhs/plugin/client/src/layout/world.tsx
+@@ -148,6 +148,38 @@ function WorldMap(props: { world: World; devices: Device[] }) {
+   const places = world.places ?? []
+   const zones = places.filter((p) => p.points)
+   const landmarks = places.filter((p) => p.at)
++  // Indoor maps can carry dozens of long place names. Keep every pin and its title,
++  // but only draw labels that fit without covering another label or a device.
++  const labelWidth = (text: string) =>
++    Array.from(text).reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 11.5 : 6.5), 0)
++  type Box = { x: number; y: number; w: number; h: number }
++  const boxes: Box[] = on.flatMap((d) => {
++    const [x, y] = px(d.position?.x ?? 0, d.position?.y ?? 0)
++    const w = labelWidth(displayName(d))
++    return [
++      { x: x - 15, y: y - 15, w: 30, h: 30 },
++      { x: x > width * 0.72 ? x - 12 - w : x + 12, y: y + 3, w, h: 16 },
++    ]
++  })
++  const labels = new Set<string>()
++  for (const l of landmarks) {
++    const [x, y] = px(...(l.at as Pt))
++    const w = labelWidth(l.name)
++    const box = { x: x > width * 0.72 ? x - 7 - w : x + 7, y: y - 19, w, h: 15 }
++    if (box.x < 2 || box.x + w > width - 2 || box.y < 2 || box.y + box.h > height - 2) continue
++    if (
++      boxes.some(
++        (b) =>
++          box.x < b.x + b.w + 3 &&
++          box.x + box.w + 3 > b.x &&
++          box.y < b.y + b.h + 3 &&
++          box.y + box.h + 3 > b.y,
++      )
++    )
++      continue
++    boxes.push(box)
++    labels.add(l.id)
++  }
+   const zoneName = (id: string | undefined) => places.find((p) => p.id === id)?.name ?? id
+   return (
+     <section className="mhs-world-card">
+@@ -171,7 +203,7 @@ function WorldMap(props: { world: World; devices: Device[] }) {
+             <ZoneShape key={z.id} zone={z} px={px} />
+           ))}
+           {landmarks.map((l) => (
+-            <LandmarkPin key={l.id} landmark={l} px={px} width={width} />
++            <LandmarkPin key={l.id} landmark={l} px={px} width={width} showLabel={labels.has(l.id)} />
+           ))}
+           {[...on.filter((d) => !d.available), ...on.filter((d) => d.available)].map((d) => (
+             <DeviceMarker key={d.id} device={d} px={px} width={width} onOpen={() => nav.open(d.id)} />
+@@ -238,7 +270,7 @@ function ZoneShape(props: { zone: Place; px: Px }) {
+   )
+ }
+ 
+-function LandmarkPin(props: { landmark: Place; px: Px; width: number }) {
++function LandmarkPin(props: { landmark: Place; px: Px; width: number; showLabel: boolean }) {
+   const l = props.landmark
+   const [x, y] = props.px(...(l.at as Pt))
+   const yaw = l.yaw === undefined ? undefined : (-l.yaw * Math.PI) / 180
+@@ -248,7 +280,7 @@ function LandmarkPin(props: { landmark: Place; px: Px; width: number }) {
+       {yaw !== undefined && <line x1={x} y1={y} x2={x + 11 * Math.cos(yaw)} y2={y + 11 * Math.sin(yaw)} />}
+       <path d={`M ${x} ${y} l -4.5 -8 a 5 5 0 1 1 9 0 z`} />
+       <circle cx={x} cy={y - 10.5} r={1.8} />
+-      <Label x={x} y={y - 7} width={props.width} gap={7} text={l.name} />
++      {props.showLabel && <Label x={x} y={y - 7} width={props.width} gap={7} text={l.name} />}
+     </g>
+   )
+ }

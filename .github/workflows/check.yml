@@ -1,0 +1,31 @@
+name: Source and MHS tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Fetch the official SDK baseline
+        run: |
+          git clone https://github.com/AgnesAI-Labs/agnes-harness.git /tmp/agh-mhs-sdk
+          git -C /tmp/agh-mhs-sdk checkout 98bc11572ba162bcdf6ce2b29612a44508faf951
+      - name: Install adapter dependencies
+        run: python -m pip install -r requirements-mhs.txt
+      - name: Source and publication checks
+        run: python scripts/check-source.py
+      - name: MHS behavior tests
+        env:
+          PYTHONPATH: /tmp/agh-mhs-sdk/packages/mhs/python/src
+        run: python -m unittest discover -s mhs -p test_nav_device.py -v
+      - name: JavaScript syntax
+        run: find . -type f \( -name '*.mjs' -o -name '*.js' \) -print0 | xargs -0 -n 1 node --check

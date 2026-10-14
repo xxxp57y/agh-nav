@@ -1,0 +1,14 @@
+{
+  "client": {
+    "entry": "./client/index.js",
+    "styles": ["./client/index.css"],
+    "slots": ["ui:sidebar"],
+    "publicConfig": {
+      "label": "导航工作台",
+      "subtitle": "实时导航（选场景→下指令→看画面与轨迹）+ 五套恢复配置对照",
+      "navliveUrl": "http://127.0.0.1:43121"
+    },
+    "services": ["nav.board"],
+    "projections": []
+  }
+}
